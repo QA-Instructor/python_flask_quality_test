@@ -33,6 +33,8 @@ pipeline:
                   name: Manual sonar scan
                   identifier: Manual_sonar_scan
                   spec:
+                    connectorRef: account.harnessImage
+                    image: sonarsource/sonar-scanner-cli:11
                     shell: Sh
                     command: |-
                       sonar-scanner \
