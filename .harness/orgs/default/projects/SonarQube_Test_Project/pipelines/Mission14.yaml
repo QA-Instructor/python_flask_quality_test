@@ -43,7 +43,7 @@ pipeline:
                         level: info
                     connectorRef: account.harnessImage
                     auth:
-                      access_token: <+secrets.getValue("sonarqube")>
+                      access_token: <+secrets.getValue("org.sonarqube-global-token")>
                       domain: http://35.206.188.23:9000/
                       ssl: true
                     tool:
