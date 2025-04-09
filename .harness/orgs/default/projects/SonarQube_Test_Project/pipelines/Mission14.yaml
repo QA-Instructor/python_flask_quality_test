@@ -1,0 +1,50 @@
+pipeline:
+  name: Mission14
+  identifier: Mission14
+  projectIdentifier: SonarQube_Test_Project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: Mission14_Connector
+        build: <+input>
+  stages:
+    - stage:
+        name: scan python-flask codebase
+        identifier: scan_pythonflask_codebase
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Sonarqube
+                  name: Sonarqube scan
+                  identifier: Sonarqube_scan
+                  spec:
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: repository
+                      detection: auto
+                    advanced:
+                      log:
+                        level: info
+                    connectorRef: account.harnessImage
+                    auth:
+                      access_token: <+secrets.getValue("sonarqube")>
+                      domain: http://35.206.188.23:9000/
+                      ssl: true
+                    tool:
+                      project_key: python-flask-project
