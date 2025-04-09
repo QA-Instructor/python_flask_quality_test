@@ -54,4 +54,8 @@ pipeline:
                   identifier: get_quality_gate
                   spec:
                     shell: Bash
-                    command: "curl -k -u <+secrets.getValue(\"org.sonar-global-token\"): -G --data-urlencode --data-urlencode http://35.206.188.23:9000/api/qualitygates/project_status?projectKey=python-flask-project"
+                    command: |-
+                      token = <+secrets.getValue("org.sonar-gloabl-token")
+                      echo "Token"
+                      echo ${token}
+                      curl -k -u ${token}: -G --data-urlencode --data-urlencode http://35.206.188.23:9000/api/qualitygates/project_status?projectKey=python-flask-project
