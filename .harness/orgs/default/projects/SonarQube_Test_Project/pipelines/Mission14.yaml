@@ -57,7 +57,7 @@ pipeline:
                   spec:
                     shell: Bash
                     command: |-
-                      token='<+secrets.getValue("sq_may_user")'
+                      token='<+secrets.getValue("SQ_MAY_USER")'
                       echo "Token"
                       echo $token
                       curl -k -u ${token}: -G --data-urlencode --data-urlencode http://35.206.188.23:9000/api/qualitygates/project_status?projectKey=python-flask-project
