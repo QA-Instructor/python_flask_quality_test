@@ -9,6 +9,7 @@ pipeline:
       codebase:
         connectorRef: Mission14_Connector
         build: <+input>
+        sparseCheckout: []
   stages:
     - stage:
         name: scan python-flask codebase
@@ -41,6 +42,7 @@ pipeline:
                     advanced:
                       log:
                         level: info
+                      fail_on_severity: low
                     connectorRef: account.harnessImage
                     auth:
                       access_token: <+secrets.getValue("org.sonar-global-token")>
