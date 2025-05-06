@@ -45,7 +45,7 @@ pipeline:
                       fail_on_severity: low
                     connectorRef: account.harnessImage
                     auth:
-                      access_token: <+secrets.getValue("project.SQ_MAY_USER")>
+                      access_token: <+secrets.getValue("SQ_MAY_USER")>
                       domain: http://35.206.188.23:9000/
                       ssl: true
                     tool:
