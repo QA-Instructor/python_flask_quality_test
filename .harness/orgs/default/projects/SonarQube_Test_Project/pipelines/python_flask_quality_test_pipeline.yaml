@@ -1,0 +1,48 @@
+pipeline:
+  name: python_flask_quality_test_pipeline
+  identifier: python_flask_quality_test_pipeline
+  projectIdentifier: SonarQube_Test_Project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: python_quality_connector
+        build: <+input>
+  stages:
+    - stage:
+        name: scan with sonarqube
+        identifier: scan_with_sonarqube
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Sonarqube
+                  name: Sonarqube scan
+                  identifier: Sonarqube_scan
+                  spec:
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: repository
+                      detection: auto
+                    advanced:
+                      log:
+                        level: info
+                      fail_on_severity: low
+                    auth:
+                      access_token: <+secrets.getValue("SQ_MAY_USER")>
+                      domain: <+secrets.getValue("sonarqube_url")>
+                      ssl: true
