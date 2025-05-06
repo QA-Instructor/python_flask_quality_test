@@ -45,7 +45,7 @@ pipeline:
                       fail_on_severity: low
                     connectorRef: account.harnessImage
                     auth:
-                      access_token: <+secrets.getValue("org.sonar-global-token")>
+                      access_token: <+secrets.getValue("project.sq-may-user")>
                       domain: http://35.206.188.23:9000/
                       ssl: true
                     tool:
